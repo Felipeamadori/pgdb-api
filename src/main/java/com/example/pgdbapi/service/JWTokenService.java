@@ -24,7 +24,7 @@ public class JWTokenService {
         Date dataExpiracao = new Date(today.getTime() + Long.parseLong(expiration));
 
         return Jwts.builder()
-                .setIssuer("API Gameslist")
+                .setIssuer("API PGDB")
                 .setSubject(String.valueOf(logado.getId()))
                 .setIssuedAt(today)
                 .setExpiration(dataExpiracao)

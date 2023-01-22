@@ -51,4 +51,17 @@ public class CandidatoController {
             throw new Exception(e.getMessage());
         }
     }
+
+    @GetMapping("/by-uf/{uf}")
+    public ResponseEntity<List<Candidato>> getCandidatoById(@PathVariable String uf) throws Exception {
+        try {
+            List<Candidato> u = candidatoService.getByUf(uf);
+            if (!u.isEmpty()) {
+                return ResponseEntity.ok().body(u);
+            }
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

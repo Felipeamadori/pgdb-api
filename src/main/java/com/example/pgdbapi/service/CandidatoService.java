@@ -36,4 +36,12 @@ public class CandidatoService {
             throw new Exception(e.getMessage());
         }
     }
+
+    public List<Candidato> getByUf(String uf) throws Exception {
+        try {
+            return candidatoRepository.findAllBySiglaUf(uf);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

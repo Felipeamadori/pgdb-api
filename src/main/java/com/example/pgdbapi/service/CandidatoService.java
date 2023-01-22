@@ -39,7 +39,15 @@ public class CandidatoService {
 
     public List<Candidato> getByUf(String uf) throws Exception {
         try {
-            return candidatoRepository.findAllBySiglaUf(uf);
+            return candidatoRepository.findAllBySiglaUfEqualsIgnoreCase(uf);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public List<Candidato> getByCargo(String cargo) throws Exception {
+        try {
+            return candidatoRepository.findAllByCargoEqualsIgnoreCase(cargo);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

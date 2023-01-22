@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface CandidatoRepository extends JpaRepository<Candidato, Long> {
-    List<Candidato> findAllBySiglaUf(String uf);
+    List<Candidato> findAllBySiglaUfEqualsIgnoreCase(String uf);
+
+    List<Candidato> findAllByCargoEqualsIgnoreCase(String cargo);
 }

@@ -53,9 +53,22 @@ public class CandidatoController {
     }
 
     @GetMapping("/by-uf/{uf}")
-    public ResponseEntity<List<Candidato>> getCandidatoById(@PathVariable String uf) throws Exception {
+    public ResponseEntity<List<Candidato>> getCandidatoByUf(@PathVariable String uf) throws Exception {
         try {
             List<Candidato> u = candidatoService.getByUf(uf);
+            if (!u.isEmpty()) {
+                return ResponseEntity.ok().body(u);
+            }
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping("/by-cargo/{cargo}")
+    public ResponseEntity<List<Candidato>> getCandidatoByCargo(@PathVariable String cargo) throws Exception {
+        try {
+            List<Candidato> u = candidatoService.getByCargo(cargo);
             if (!u.isEmpty()) {
                 return ResponseEntity.ok().body(u);
             }

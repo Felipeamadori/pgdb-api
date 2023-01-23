@@ -1,5 +1,6 @@
 package com.example.pgdbapi.controller;
 
+import com.example.pgdbapi.dto.SumVotos;
 import com.example.pgdbapi.model.Candidato;
 import com.example.pgdbapi.model.Votos;
 import com.example.pgdbapi.service.VotosService;
@@ -38,6 +39,39 @@ public class VotosController {
                 return ResponseEntity.ok().body(u.get());
             }
             return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping("/total-estado/{uf}")
+    public ResponseEntity<List<SumVotos>> getTotalVotosByUf(@PathVariable String uf) throws Exception {
+        try {
+            List<SumVotos> u = votosService.totalVotosByUf(uf);
+            if (!u.isEmpty()) {
+                return ResponseEntity.ok().body(u);
+            }
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping("/total-candidato/{id}")
+    public ResponseEntity<Integer> getTotalVotosByUf(@PathVariable Long id) throws Exception {
+        try {
+            int u = votosService.totalCandidato(id);
+            return ResponseEntity.ok().body(u);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping("/total-presidente")
+    public ResponseEntity<List<SumVotos>> getTotalVotosPresidente() throws Exception {
+        try {
+            List<SumVotos> u = votosService.totalPresidente();
+            return ResponseEntity.ok().body(u);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

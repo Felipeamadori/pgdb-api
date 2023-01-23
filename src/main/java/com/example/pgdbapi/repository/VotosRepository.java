@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface VotosRepository extends JpaRepository<Votos, Long> {
 
-    @Query(value = "SELECT c.id as id_cand, count(v.qtd_votos) as total " +
+    @Query(value = "SELECT c.id as id_cand, count(v.qtd_votos) as total, c.nome as nome " +
             " FROM candidato c " +
             " JOIN votos v on c.id = v.candidato_id " +
             " JOIN boletim b on b.id = v.boletim_id " +
@@ -27,7 +27,7 @@ public interface VotosRepository extends JpaRepository<Votos, Long> {
             " WHERE b.valido = true AND c.id = :id ", nativeQuery = true)
     int totalVotosByCandidato(@Param("id") Long id);
 
-    @Query(value = "SELECT c.id as id_cand, count(v.qtd_votos) as total " +
+    @Query(value = "SELECT c.id as id_cand, count(v.qtd_votos) as total, c.nome as nome " +
             " FROM candidato c " +
             " JOIN votos v on c.id = v.candidato_id " +
             " JOIN boletim b on b.id = v.boletim_id " +

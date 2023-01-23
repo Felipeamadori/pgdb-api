@@ -11,9 +11,12 @@ import org.springframework.stereotype.Repository;
 public interface BoletimRepository extends JpaRepository<Boletim, Long> {
 
     @Modifying
-    @Query(nativeQuery = true, value = " UPDATE boletim SET valido = false" +
-            " WHERE zona = :zona AND secao = :secao ; " +
-            " UPDATE boletim SET valido = true " +
-            " WHERE id = :id ;")
-    void validarBoletim(@Param("id") Long id, @Param("zona") int zona, @Param("secao") int secao);
+    @Query(nativeQuery = true, value = " UPDATE boletim SET valido = false " +
+            " WHERE zona = :zona AND secao = :secao ")
+    void setValidoFalseZonaSecao(@Param("zona") int zona, @Param("secao") int secao);
+
+    @Modifying
+    @Query(nativeQuery = true, value = " UPDATE boletim SET valido = true " +
+            " WHERE id = :id ")
+    void setValidoTrueById(@Param("id") Long id);
 }

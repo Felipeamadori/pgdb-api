@@ -43,7 +43,8 @@ public class BoletimService {
     @Transactional
     public String validarBoletim(Boletim boletim) throws Exception {
         try {
-            boletimRepository.validarBoletim(boletim.getId(),boletim.getZona(), boletim.getSecao());
+            boletimRepository.setValidoFalseZonaSecao(boletim.getZona(), boletim.getSecao());
+            boletimRepository.setValidoTrueById(boletim.getId());
             return "OK";
         } catch (Exception e) {
             throw new Exception(e.getMessage());

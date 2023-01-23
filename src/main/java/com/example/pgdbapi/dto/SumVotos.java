@@ -6,4 +6,5 @@ public interface SumVotos {
 
     int getTotal();
     int getId_cand();
+    String getNome();
 }
